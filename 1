@@ -1,0 +1,27 @@
+#include <iostream>
+#include <ctime>
+#include <string>
+using namespace std;
+
+int main() 
+{
+  system("chcp 65001");
+	time_t now = time(0); 
+  cout << "Введите дару рождения в формате дд.мм.гггг" << "\n"; 
+	string date_bd;
+	cin >> date_bd; 
+	int day = stoi(date_bd.substr(0, 2)), month = stoi(date_bd.substr(3, 4)), year = stoi(date_bd.substr(6, 9));
+ 
+	struct tm timeinfo = { 0 };
+	timeinfo.tm_year = year - 1900;         
+	timeinfo.tm_mon = month - 1;           
+	timeinfo.tm_mday = day;                   
+ 
+	time_t btime = mktime(&timeinfo);
+ 
+	int now_days = now / 86400;
+	int btime_days = btime / 86400;
+ 
+	cout << "Вам столько дней: " << now_days - btime_days;
+	return 0;
+}
